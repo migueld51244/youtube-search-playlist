@@ -33,6 +33,9 @@ body {
   display: flex;
   gap: 1.3rem;
   align-items: center;
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 2px solid red;
 }
 
 .status-img {
