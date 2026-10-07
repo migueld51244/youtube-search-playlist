@@ -28,3 +28,14 @@ body {
   flex-direction: column;
   gap: 0.7rem;
 }
+
+.status {
+  display: flex;
+  gap: 1.3rem;
+  align-items: center;
+}
+
+.status-img {
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+}
