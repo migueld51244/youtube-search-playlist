@@ -1,0 +1,13 @@
+/* Import Clarity City custom font */
+@import url("https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* CSS Reset */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Clarity City", sans-serif;
+}
