@@ -5,6 +5,6 @@
   "description": "Be able to use a search bar inside your YT playlists!",
   "permissions": ["storage"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   }
 }
