@@ -3,7 +3,7 @@
   "name": "YouTube Playlist Searcher",
   "version": "0.1",
   "description": "Be able to use a search bar inside your YT playlists!",
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab"],
   "action": {
     "default_popup": "popup/popup.html"
   }
