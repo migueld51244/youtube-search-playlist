@@ -1,0 +1,21 @@
+{
+  "name": "youtube-search-playlist",
+  "version": "1.0.0",
+  "description": "YouTube Playlist Search - Browser Extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/migueld51244/youtube-search-playlist.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/migueld51244/youtube-search-playlist/issues"
+  },
+  "homepage": "https://github.com/migueld51244/youtube-search-playlist#readme"
+}
