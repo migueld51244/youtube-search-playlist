@@ -12,6 +12,13 @@
     }
   ],
   "action": {
-    "default_popup": "popup/popup.html"
+    "default_popup": "popup/popup.html",
+    "default_icon": "assets/main-logo.png"
+  },
+  "icons": {
+    "16": "assets/main-logo.png",
+    "32": "assets/main-logo.png",
+    "48": "assets/main-logo.png",
+    "128": "assets/main-logo.png"
   }
 }
