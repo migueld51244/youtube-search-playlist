@@ -4,6 +4,13 @@
   "version": "0.1",
   "description": "Be able to use a search bar inside your YT playlists!",
   "permissions": ["storage", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
   "action": {
     "default_popup": "popup/popup.html"
   }
