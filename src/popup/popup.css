@@ -1,44 +1,118 @@
 /* Import Clarity City custom font */
 @import url("https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&display=swap");
 
-/* CSS Reset */
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark: #0f172a;
+  --bg-soft: #f8fafc;
+  --panel: #ffffff;
+  --panel-alt: #e2e8f0;
+  --accent: #ef4444;
+  --accent-dark: #b91c1c;
+  --text-main: #111827;
+  --text-soft: #475569;
+  --shadow: rgba(15, 23, 42, 0.12);
 }
 
 body {
-  font-family: "Clarity City", sans-serif;
   width: 30rem;
-  background-color: #6bdd32;
+  min-height: 100vh;
+  font-family: "Clarity City", sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(180deg, #d9f99d 0%, #bbf7d0 100%);
 }
 
 .hero {
-  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding: 0.75rem 0.9rem;
+  border: 2px solid var(--accent-dark);
+  border-radius: 12px;
+  background: rgba(254, 242, 242, 0.9);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.status-p {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.status-img {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
 }
 
 .title-container {
-  margin: 1rem 2rem;
+  padding: 0.75rem 1rem;
   text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.title-container h1 {
+  font-size: 1.7rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: var(--bg-dark);
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+.callout {
+  margin: 0.7rem 0 0.35rem;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--accent-dark);
+}
+
+.title-container p:last-child {
+  font-size: 0.92rem;
+  color: var(--text-soft);
 }
 
 .info-container {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.8rem;
 }
 
-.status {
-  display: flex;
-  gap: 1.3rem;
-  align-items: center;
-  padding: 0.6rem;
-  border-radius: 10px;
-  border: 2px solid red;
+.info-item {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 2px 8px var(--shadow);
 }
 
-.status-img {
-  width: 2rem;
-  aspect-ratio: 1 / 1;
+.info-item h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--bg-dark);
+}
+
+.info-item p {
+  margin-top: 0.4rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+  font-size: 0.9rem;
 }
