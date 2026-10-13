@@ -17,38 +17,52 @@ function highlightMatches(title, query, active) {
   const queryLower = query.toLocaleLowerCase();
   const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
   const textNodes = [];
+  let titleText = "";
 
   while (walker.nextNode()) {
-    if (walker.currentNode.textContent.trim()) {
-      textNodes.push(walker.currentNode);
-    }
+    const textNode = walker.currentNode;
+    const text = textNode.textContent || "";
+    textNodes.push({ node: textNode, start: titleText.length, text });
+    titleText += text;
   }
 
-  for (const textNode of textNodes) {
-    const text = textNode.textContent;
-    const textLower = text.toLocaleLowerCase();
-    let searchFrom = 0;
-    let matchIndex = textLower.indexOf(queryLower, searchFrom);
+  const titleLower = titleText.toLocaleLowerCase();
+  const matchRanges = [];
+  let matchIndex = titleLower.indexOf(queryLower);
+  while (matchIndex !== -1) {
+    matchRanges.push([matchIndex, matchIndex + query.length]);
+    matchIndex = titleLower.indexOf(queryLower, matchIndex + query.length);
+  }
 
-    if (matchIndex === -1) continue;
+  for (const { node, start, text } of textNodes) {
+    const end = start + text.length;
+    const ranges = matchRanges
+      .map(([matchStart, matchEnd]) => [
+        Math.max(matchStart, start),
+        Math.min(matchEnd, end),
+      ])
+      .filter(([matchStart, matchEnd]) => matchStart < matchEnd);
+
+    if (!ranges.length) continue;
 
     const fragment = document.createDocumentFragment();
-    while (matchIndex !== -1) {
-      fragment.append(document.createTextNode(text.slice(searchFrom, matchIndex)));
+    let searchFrom = 0;
+    for (const [matchStart, matchEnd] of ranges) {
+      const localStart = matchStart - start;
+      const localEnd = matchEnd - start;
+      fragment.append(document.createTextNode(text.slice(searchFrom, localStart)));
 
       const mark = document.createElement("mark");
       mark.className = active
         ? `${highlightClass} ${activeHighlightClass}`
         : highlightClass;
-      mark.textContent = text.slice(matchIndex, matchIndex + query.length);
+      mark.textContent = text.slice(localStart, localEnd);
       fragment.append(mark);
-
-      searchFrom = matchIndex + query.length;
-      matchIndex = textLower.indexOf(queryLower, searchFrom);
+      searchFrom = localEnd;
     }
 
     fragment.append(document.createTextNode(text.slice(searchFrom)));
-    textNode.replaceWith(fragment);
+    node.replaceWith(fragment);
   }
 }
 
@@ -87,9 +101,11 @@ function findNextMatch(input, status) {
   }
 
   currentMatchIndex = (currentMatchIndex + 1) % matches.length;
-  const { item, title } = matches[currentMatchIndex];
+  const { item } = matches[currentMatchIndex];
   status.textContent = `Match ${currentMatchIndex + 1} of ${matches.length}`;
-  highlightMatches(title, query, true);
+  matches.forEach(({ title }, index) => {
+    highlightMatches(title, query, index === currentMatchIndex);
+  });
   item.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
