@@ -2,44 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Playlist Searcher</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <main class="hero">
-      <div class="status">
+      <section class="status" aria-live="polite">
         <p class="status-p">Status: Error! Not on YouTube page</p>
-        <img class="status-img" src="../assets/error-status-icon.svg" alt="Status: Error! Not on YouTube page" />
-      </div>
-      <div class="title-container">
-        <h1>YouTube Playlist Searcher</h1>
-        <p>Be able to use a search box inside your playlists!</p>
-        <em class="special"><strong>At last!</strong></em>
-        <p>Works on Watch Later or any playlist you encounter!</p>
-      </div>
+        <img
+          class="status-img"
+          src="../assets/error-status-icon.svg"
+          alt="Status icon showing an error"
+        />
+      </section>
 
-      <article class="info-container">
+      <header class="title-container">
+        <h1>YouTube Playlist Searcher</h1>
+        <p class="subtitle">Search inside playlists without leaving the page.</p>
+        <p class="callout"><strong>At last!</strong></p>
+        <p>Works on Watch Later or any playlist you encounter.</p>
+      </header>
+
+      <section class="info-container" aria-label="How to use the extension">
         <article class="info-item">
           <h2>How to start using it?</h2>
           <p>
-            Just open up a YouTube playlist that a search box like this will
-            appear:
+            Open a YouTube playlist and a search box like this will appear.
           </p>
-          <!-- <img src="" alt=""> -->
+          
           <p>
-            Then, start typing! As you type, the matching video will appear.
+            Start typing and the matching video will appear instantly.
           </p>
-          <p>If more than one matches, you can select them with the arrows:</p>
-          <!-- <img src="" alt=""> -->
+          <p>If more than one match appears, use the arrow keys to navigate.</p>
+          
         </article>
+
         <article class="info-item">
           <h2>Disclaimer</h2>
           <p>
-            You won't be able to search the entire playlist at once, since
-            YouTube uses a feature called "Lazy Loading". This only loads the
-            first 100 videos and as you scroll, it loads another more 100
+            You cannot search the entire playlist at once because YouTube uses
+            lazy loading. It initially loads the first 100 videos, then loads
+            more as you scroll.
           </p>
         </article>
-      </article>
+      </section>
     </main>
     <script src="popup.js"></script>
   </body>
