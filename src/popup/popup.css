@@ -20,7 +20,7 @@
 }
 
 body {
-  width: 30rem;
+  width: min(30rem, 100vw);
   min-height: 100vh;
   font-family: "Clarity City", sans-serif;
   color: var(--text-main);
@@ -115,4 +115,32 @@ body {
   line-height: 1.5;
   color: var(--text-soft);
   font-size: 0.9rem;
+}
+
+@media (max-width: 24rem) {
+  .hero {
+    gap: 0.9rem;
+    padding: 0.85rem;
+  }
+
+  .status {
+    gap: 0.6rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .status-p {
+    font-size: 0.85rem;
+  }
+
+  .title-container {
+    padding: 0.75rem;
+  }
+
+  .title-container h1 {
+    font-size: 1.45rem;
+  }
+
+  .info-item {
+    padding: 0.8rem;
+  }
 }
