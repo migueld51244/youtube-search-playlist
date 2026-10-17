@@ -11,6 +11,7 @@ YouTube playlists are useful, but searching within a large playlist is not alway
 ## Features
 
 - Search directly inside a YouTube playlist page
+- Adds the search box when navigating to a playlist without refreshing
 - Show the search box only on dedicated playlist pages (`/playlist?list=...`), not channel or watch pages
 - Highlights matching video titles in-place
 - Finds the next match and scrolls to it smoothly
