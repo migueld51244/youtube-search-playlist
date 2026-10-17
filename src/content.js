@@ -110,10 +110,20 @@ function findNextMatch(input, status) {
 }
 
 function addSearchControl() {
+  const existingContainer = document.getElementById(searchContainerId);
+  const playlistId = new URLSearchParams(window.location.search).get("list");
+  if (window.location.pathname !== "/playlist" || !playlistId) {
+    existingContainer?.remove();
+    clearHighlights();
+    currentQuery = "";
+    currentMatchIndex = -1;
+    return;
+  }
+
   const appendArea = document.querySelector(
     "chip-bar-view-model.ytChipBarViewModelHost",
   );
-  if (!appendArea || document.getElementById(searchContainerId)) return;
+  if (!appendArea || existingContainer) return;
 
   const container = document.createElement("div");
   container.id = searchContainerId;
@@ -192,3 +202,4 @@ observer.observe(document.documentElement, {
   childList: true,
   subtree: true,
 });
+document.addEventListener("yt-navigate-finish", addSearchControl);
