@@ -13,7 +13,9 @@ YouTube playlists are useful, but searching within a large playlist is not alway
 - Search directly inside a YouTube playlist page
 - Find videos in both classic and newer playlist layouts
 - Adds the search box when navigating to a playlist without refreshing
-- Places a fallback search area in the playlist layout when YouTube's chip bar is unavailable
+- Places the search box above the playlist's Play and Shuffle controls
+- Uses the chip bar or playlist content as a fallback when those controls are unavailable
+- Keeps the fallback search area visible below YouTube's masthead while scrolling playlist items
 - Show the search box on dedicated playlist pages and playlist watch pages, not unrelated pages
 - Highlights matching video titles in-place
 - Adapts the search controls to YouTube's light and dark themes

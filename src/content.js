@@ -152,25 +152,58 @@ function getSearchAppendArea() {
           "chip-bar-view-model.ytChipBarViewModelHost",
         )
       : null;
-  if (chipBar) {
-    document.getElementById(fallbackAreaId)?.remove();
-    return chipBar;
-  }
-
   let fallbackArea = document.getElementById(fallbackAreaId);
   if (!fallbackArea) {
     fallbackArea = document.createElement("div");
     fallbackArea.id = fallbackAreaId;
   }
+  const playlistMenu = document.querySelector(
+    "ytd-playlist-header-renderer .play-menu",
+  );
+  if (playlistMenu?.parentElement) {
+    if (
+      fallbackArea.parentElement !== playlistMenu.parentElement ||
+      fallbackArea.nextElementSibling !== playlistMenu
+    ) {
+      playlistMenu.parentElement.insertBefore(fallbackArea, playlistMenu);
+    }
+    return fallbackArea;
+  }
+
+  if (chipBar?.parentElement) {
+    if (
+      fallbackArea.parentElement !== chipBar.parentElement ||
+      fallbackArea.nextElementSibling !== chipBar
+    ) {
+      chipBar.parentElement.insertBefore(fallbackArea, chipBar);
+    }
+    return fallbackArea;
+  }
+
   const playlistContent = document.querySelector(
     "ytd-playlist-video-list-renderer, ytd-playlist-panel-video-renderer, ytd-playlist-video-renderer, yt-lockup-view-model",
   );
-  if (playlistContent?.parentElement) {
+  if (playlistContent) {
+    const playlistList = playlistContent.closest(
+      "#contents, #items, .playlist-items",
+    );
+    const playlistRow = playlistList
+      ? Array.from(playlistList.children).find(
+          (child) =>
+            child === playlistContent || child.contains(playlistContent),
+        )
+      : null;
+    const insertionParent = playlistRow
+      ? playlistList
+      : playlistContent.parentElement;
+    const insertionPoint = playlistRow || playlistContent;
+    if (!insertionParent) return null;
+
     if (
-      fallbackArea.parentElement !== playlistContent.parentElement ||
-      fallbackArea.nextElementSibling !== playlistContent
+      fallbackArea.parentElement !== insertionParent ||
+      fallbackArea.nextElementSibling !== insertionPoint
     ) {
-      playlistContent.parentElement.insertBefore(fallbackArea, playlistContent);
+      insertionParent.insertBefore(fallbackArea, insertionPoint);
     }
     return fallbackArea;
   }
@@ -283,6 +316,9 @@ function addSearchControl() {
       }
       #${fallbackAreaId} {
         width: 100%;
+        position: sticky;
+        top: 56px;
+        z-index: 1;
         background: var(--yt-spec-base-background, #fff);
       }
       html[dark] #${fallbackAreaId} {
