@@ -1,5 +1,4 @@
 const searchContainerId = "playlist-search-container";
-const fallbackAreaId = "playlist-search-fallback";
 const highlightClass = "playlist-search-highlight";
 const activeHighlightClass = "playlist-search-highlight-active";
 const playlistItemSelector =
@@ -145,89 +144,10 @@ function findNextMatch(input, status) {
   item.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-function getSearchAppendArea() {
-  const chipBar =
-    window.location.pathname === "/playlist"
-      ? document.querySelector(
-          "chip-bar-view-model.ytChipBarViewModelHost",
-        )
-      : null;
-  let fallbackArea = document.getElementById(fallbackAreaId);
-  if (!fallbackArea) {
-    fallbackArea = document.createElement("div");
-    fallbackArea.id = fallbackAreaId;
-  }
-  const playlistMenu = document.querySelector(
-    "ytd-playlist-header-renderer .play-menu",
+function getPlaylistPlayMenu() {
+  return document.querySelector(
+    "ytd-playlist-header-renderer .play-menu, ytd-playlist-panel-renderer .play-menu, .ytPageHeaderViewModelFlexibleActions .ytFlexibleActionsViewModelActionRow",
   );
-  if (playlistMenu?.parentElement) {
-    if (
-      fallbackArea.parentElement !== playlistMenu.parentElement ||
-      fallbackArea.nextElementSibling !== playlistMenu
-    ) {
-      playlistMenu.parentElement.insertBefore(fallbackArea, playlistMenu);
-    }
-    return fallbackArea;
-  }
-
-  if (chipBar?.parentElement) {
-    if (
-      fallbackArea.parentElement !== chipBar.parentElement ||
-      fallbackArea.nextElementSibling !== chipBar
-    ) {
-      chipBar.parentElement.insertBefore(fallbackArea, chipBar);
-    }
-    return fallbackArea;
-  }
-
-  const playlistContent = document.querySelector(
-    "ytd-playlist-video-list-renderer, ytd-playlist-panel-video-renderer, ytd-playlist-video-renderer, yt-lockup-view-model",
-  );
-  if (playlistContent) {
-    const playlistList = playlistContent.closest(
-      "#contents, #items, .playlist-items",
-    );
-    const playlistRow = playlistList
-      ? Array.from(playlistList.children).find(
-          (child) =>
-            child === playlistContent || child.contains(playlistContent),
-        )
-      : null;
-    const insertionParent = playlistRow
-      ? playlistList
-      : playlistContent.parentElement;
-    const insertionPoint = playlistRow || playlistContent;
-    if (!insertionParent) return null;
-
-    if (
-      fallbackArea.parentElement !== insertionParent ||
-      fallbackArea.nextElementSibling !== insertionPoint
-    ) {
-      insertionParent.insertBefore(fallbackArea, insertionPoint);
-    }
-    return fallbackArea;
-  }
-
-  const playlistMain =
-    document.querySelector("#primary-inner") ||
-    document.querySelector("#primary") ||
-    document.querySelector('ytd-browse[page-subtype="playlist"]');
-  if (!playlistMain) return null;
-
-  const playlistHeader = playlistMain.querySelector(
-    "ytd-playlist-header-renderer",
-  );
-  if (playlistHeader?.parentElement) {
-    if (
-      fallbackArea.parentElement !== playlistHeader.parentElement ||
-      fallbackArea.previousElementSibling !== playlistHeader
-    ) {
-      playlistHeader.insertAdjacentElement("afterend", fallbackArea);
-    }
-  } else if (fallbackArea.parentElement !== playlistMain) {
-    playlistMain.prepend(fallbackArea);
-  }
-  return fallbackArea;
 }
 
 function addSearchControl() {
@@ -238,18 +158,20 @@ function addSearchControl() {
     window.location.pathname === "/watch";
   if (!isPlaylistRoute || !playlistId) {
     existingContainer?.remove();
-    document.getElementById(fallbackAreaId)?.remove();
     clearHighlights();
     currentQuery = "";
     currentMatchIndex = -1;
     return false;
   }
 
-  const appendArea = getSearchAppendArea();
-  if (!appendArea) return false;
+  const playlistMenu = getPlaylistPlayMenu();
+  if (!playlistMenu?.parentElement) return false;
   if (existingContainer) {
-    if (existingContainer.parentElement !== appendArea) {
-      appendArea.append(existingContainer);
+    if (
+      existingContainer.parentElement !== playlistMenu.parentElement ||
+      existingContainer.nextElementSibling !== playlistMenu
+    ) {
+      playlistMenu.parentElement.insertBefore(existingContainer, playlistMenu);
     }
     clearNavigationRetries();
     return true;
@@ -284,7 +206,7 @@ function addSearchControl() {
   button.addEventListener("click", () => findNextMatch(input, status));
 
   container.append(input, button, status);
-  appendArea.append(container);
+  playlistMenu.parentElement.insertBefore(container, playlistMenu);
   clearNavigationRetries();
 
   if (!document.getElementById("playlist-search-styles")) {
@@ -314,16 +236,6 @@ function addSearchControl() {
         --playlist-search-border: #3f3f3f;
         color-scheme: dark;
       }
-      #${fallbackAreaId} {
-        width: 100%;
-        position: sticky;
-        top: 56px;
-        z-index: 1;
-        background: var(--yt-spec-base-background, #fff);
-      }
-      html[dark] #${fallbackAreaId} {
-        background: var(--yt-spec-base-background, #0f0f0f);
-      }
       #${searchContainerId} input {
         box-sizing: border-box;
         width: 200px;
@@ -345,6 +257,10 @@ function addSearchControl() {
         background: var(--playlist-search-control-background);
         color: var(--playlist-search-text);
         cursor: pointer;
+        white-space: nowrap;
+      }
+      #${searchContainerId} [aria-live="polite"] {
+        white-space: nowrap;
       }
       mark.${highlightClass} {
         background: #fff176;
