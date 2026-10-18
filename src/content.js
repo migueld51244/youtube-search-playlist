@@ -1,6 +1,5 @@
 const searchContainerId = "playlist-search-container";
 const fallbackAreaId = "playlist-search-fallback";
-const fixedFallbackClass = "playlist-search-fallback-fixed";
 const highlightClass = "playlist-search-highlight";
 const activeHighlightClass = "playlist-search-highlight-active";
 const playlistItemSelector =
@@ -163,11 +162,6 @@ function getSearchAppendArea() {
     fallbackArea = document.createElement("div");
     fallbackArea.id = fallbackAreaId;
   }
-  fallbackArea.classList.toggle(
-    fixedFallbackClass,
-    window.location.pathname === "/playlist",
-  );
-
   const playlistContent = document.querySelector(
     "ytd-playlist-video-list-renderer, ytd-playlist-panel-video-renderer, ytd-playlist-video-renderer, yt-lockup-view-model",
   );
@@ -293,17 +287,6 @@ function addSearchControl() {
       }
       html[dark] #${fallbackAreaId} {
         background: var(--yt-spec-base-background, #0f0f0f);
-      }
-      #${fallbackAreaId}.${fixedFallbackClass} {
-        position: fixed;
-        top: var(--ytd-masthead-height, 56px);
-        left: 0;
-        right: 0;
-        z-index: 2000;
-        pointer-events: none;
-      }
-      #${fallbackAreaId}.${fixedFallbackClass} #${searchContainerId} {
-        pointer-events: auto;
       }
       #${searchContainerId} input {
         box-sizing: border-box;
