@@ -223,6 +223,7 @@ function addSearchControl() {
         justify-content: center;
         gap: 8px;
         width: fit-content;
+        padding: 0 10px 0 10px;
         max-width: 100%;
         box-sizing: border-box;
         margin: 12px auto;
@@ -245,6 +246,10 @@ function addSearchControl() {
         border-radius: 18px;
         background: var(--playlist-search-background);
         color: var(--playlist-search-text);
+      }
+      #${searchContainerId} input:focus {
+        outline: 2px solid var(--playlist-search-text);
+        outline-offset: 1px;
       }
       #${searchContainerId} input::placeholder {
         color: var(--playlist-search-text);

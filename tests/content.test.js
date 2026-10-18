@@ -99,6 +99,21 @@ describe("playlist search content script", () => {
     assert.equal(status.textContent, "Match 1 of 2");
   });
 
+  it("uses a theme-matched focus outline for the search input", () => {
+    const window = loadContentScript(
+      "https://www.youtube.com/playlist?list=PL123",
+      playlistMarkup(["Alpha song"]),
+    );
+    const styles = window.document.querySelector(
+      "#playlist-search-styles",
+    ).textContent;
+
+    assert.match(
+      styles,
+      /#playlist-search-container input:focus\s*\{\s*outline:\s*2px solid var\(--playlist-search-text\);\s*outline-offset:\s*1px;/,
+    );
+  });
+
   it("reports no results and clears highlights when the query is cleared", () => {
     const window = loadContentScript(
       "https://www.youtube.com/playlist?list=PL123",
