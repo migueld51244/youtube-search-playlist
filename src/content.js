@@ -250,6 +250,9 @@ function addSearchControl() {
         color: var(--playlist-search-text);
         opacity: 0.7;
       }
+      #${searchContainerId} input::-webkit-search-cancel-button {
+        cursor: pointer;
+      }
       #${searchContainerId} button {
         padding: 8px 12px;
         border: 0;
