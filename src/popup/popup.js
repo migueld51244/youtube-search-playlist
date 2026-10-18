@@ -1,6 +1,7 @@
 const statusParagraph = document.querySelector(".status-p");
 const statusImage = document.querySelector(".status-img");
 const statusContainer = document.querySelector(".status");
+const extensionApi = globalThis.browser ?? globalThis.chrome;
 
 const statusMap = {
   success: {
@@ -27,7 +28,10 @@ function updateStatus(status) {
 
 // Get current tab url
 async function getPopupUrl() {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const [tab] = await extensionApi.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
   return tab?.url;
 }
 

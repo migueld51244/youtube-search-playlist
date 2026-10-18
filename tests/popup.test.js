@@ -50,14 +50,28 @@ describe("popup status indicator", () => {
     );
     dom.window.close();
   });
+
+  it("uses Firefox's browser API when available", async () => {
+    const dom = createPopup(
+      "https://www.youtube.com/playlist?list=PL123",
+      "browser",
+    );
+    await flushPromises();
+
+    assert.equal(
+      dom.window.document.querySelector(".status-p").textContent,
+      "Status: Working! User is on YouTube",
+    );
+    dom.window.close();
+  });
 });
 
-function createPopup(url) {
+function createPopup(url, apiName = "chrome") {
   const dom = new JSDOM(popupHtml, {
     url: "https://extension.test/popup/popup.html",
     runScripts: "outside-only",
   });
-  dom.window.chrome = {
+  dom.window[apiName] = {
     tabs: {
       query: async () => [{ url }],
     },

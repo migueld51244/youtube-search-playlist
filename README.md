@@ -33,13 +33,16 @@ This project is in early development and is being iterated on. Some features may
    git clone https://github.com/migueld51244/youtube-search-playlist.git
    cd youtube-search-playlist
    ```
-2. Open your Chromium-based browser and go to:
-   - Chrome: `chrome://extensions`
-   - Edge: `edge://extensions`
-3. Enable Developer mode.
-4. Click Load unpacked.
-5. Select the `src` directory in this project.
-6. Open any YouTube playlist and the search UI should appear.
+2. Load the extension in your browser:
+   - **Chrome or Edge:** Open `chrome://extensions` or `edge://extensions`,
+     enable Developer mode, click **Load unpacked**, and select this project's
+     `src` directory.
+   - **Firefox 109 or later:** Open `about:debugging#/runtime/this-firefox`,
+     click **Load Temporary Add-on...**, and select `src/manifest.json`.
+     Temporary add-ons are removed when Firefox closes. For normal installation
+     and automatic updates, the extension must be packaged and signed for
+     distribution through Firefox Add-ons.
+3. Open any YouTube playlist and the search UI should appear.
 
 ## Usage
 
