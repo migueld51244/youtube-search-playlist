@@ -1,122 +1,72 @@
 # YouTube Playlist Searcher
 
-A browser extension that adds a lightweight search box directly to YouTube playlists so you can quickly find a video without endless manual scrolling.
+Find a video in a YouTube playlist without scrolling through it by hand. Search
+loaded playlist titles, jump from match to match, and see each match highlighted
+right on the page.
 
-This project is still in active development, so things may evolve quickly as features are refined and the experience is improved.
+![YouTube Playlist Searcher running in Firefox on a YouTube playlist](preview.png)
 
-## Why this extension?
+## Get the extension
 
-YouTube playlists are useful, but searching within a large playlist is not always intuitive. This extension injects a focused search control into the playlist UI, highlighting matching titles and jumping to the next result.
+Download the package for your browser from the
+[Releases page](https://github.com/migueld51244/youtube-search-playlist/releases).
+
+### Firefox
+
+Download the Firefox `.xpi` package from a release. In Firefox, open
+`about:addons`, select the gear menu, choose **Install Add-on From File...**, and
+select the downloaded file.
+
+### Chrome
+
+Download and extract the Chrome package from a release. Open
+`chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and
+select the extracted folder containing `manifest.json`.
+
+## Search a playlist
+
+1. Open a YouTube playlist, including a playlist displayed alongside a video.
+2. Type a word or phrase into **Search this playlist**.
+3. Press Enter or select **Find Next** to move through the matching videos.
+
+Matches are highlighted in the playlist, and the active result scrolls into
+view. Search is case-insensitive and wraps around when you reach the last match.
 
 ## Features
 
-- Search directly inside a YouTube playlist page
-- Find videos in both classic and newer playlist layouts
-- Adds the search box when navigating to a playlist without refreshing
-- Places the search box directly above playlist actions in owned and unowned playlists
-- Show the search box on dedicated playlist pages and playlist watch pages, not unrelated pages
-- Highlights matching video titles in-place
-- Adapts the search controls to YouTube's light and dark themes
-- Finds the next match and scrolls to it smoothly
-- Works with playlist views that load videos dynamically
-- Lightweight browser extension with no backend required
-- Popup status indicator to confirm when the current tab is a YouTube page
+- Search playlist video titles without leaving YouTube.
+- Find the next match and see how many results match your search.
+- Highlight matches and scroll directly to the active video.
+- Works with YouTube's light and dark themes and dynamically loaded playlist
+  pages.
+- No account or backend required.
 
-## Current status
+## A note about playlist loading
 
-This project is in early development and is being iterated on. Some features may be incomplete, and the extension may change in appearance or behavior over time.
+YouTube loads playlist videos as you scroll. Searcher can find videos that
+YouTube has loaded on the page; scroll through the playlist to load more videos
+and include them in your search.
 
-## Installation
+## For developers
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/migueld51244/youtube-search-playlist.git
-   cd youtube-search-playlist
-   ```
-2. Load the extension in your browser:
-   - **Chrome or Edge:** Open `chrome://extensions` or `edge://extensions`,
-     enable Developer mode, click **Load unpacked**, and select this project's
-     `src` directory.
-   - **Firefox 109 or later:** Open `about:debugging#/runtime/this-firefox`,
-     click **Load Temporary Add-on...**, and select `src/manifest.json`.
-     Temporary add-ons are removed when Firefox closes. For normal installation
-     and automatic updates, the extension must be packaged and signed for
-     distribution through Firefox Add-ons.
-3. Open any YouTube playlist and the search UI should appear.
+To run the extension from source:
 
-## Usage
+- **Chrome or Edge:** Open `chrome://extensions` or `edge://extensions`, enable
+  Developer mode, click **Load unpacked**, and select the `src` directory.
+- **Firefox 109 or later:** Open `about:debugging#/runtime/this-firefox`, click
+  **Load Temporary Add-on...**, and select `src/manifest.json`. Temporary
+  add-ons are removed when Firefox closes.
 
-1. Open a YouTube playlist.
-2. A search box appears in the playlist controls area.
-3. Type a keyword or partial title.
-4. Press Enter or click Find Next to move through matching videos.
-5. Matching titles are highlighted and the browser will scroll to the active result.
-
-## Project structure
-
-```text
-youtube-search-playlist/
-├── LICENSE
-├── README.md
-├── package.json
-├── tests/
-│   ├── content.test.js
-│   └── popup.test.js
-├── src/
-│   ├── manifest.json
-│   ├── content.js
-│   ├── assets/
-│   └── popup/
-│       ├── popup.html
-│       ├── popup.css
-│       └── popup.js
-└── .gitignore
-```
-
-## Tests
-
-Run the automated extension tests with Node.js:
+Run the automated tests with Node.js:
 
 ```bash
 npm install
 npm test
 ```
 
-The tests use jsdom to exercise playlist search behavior and popup status updates.
-
-## How it works
-
-The extension uses a content script to watch YouTube playlist pages and inject a search control when the playlist UI is available. It then:
-
-- finds video title elements in the current playlist
-- filters them against the user's query
-- highlights matches directly in the DOM
-- jumps to the next result and scrolls the relevant item into view
-
-## Limitations
-
-Because YouTube uses lazy loading, the extension can only search videos that have already been loaded into the current page state. As you scroll, additional videos become searchable.
-
-This is also a small, focused extension, so it does not yet include broader polish such as a full build pipeline or extended configuration settings.
-
-## Roadmap
-
-Planned improvements include:
-
-- better keyboard navigation
-- more robust search behavior across loaded playlist items
-- improved styling and accessibility
-- support for additional YouTube playlist patterns
-- extension packaging and release workflow
-
-## Contributing
-
-Contributions are welcome as the project continues to evolve. If you want to help:
-
-- open an issue for a bug or feature request
-- submit a pull request with a focused improvement
-- keep changes small and targeted
+To report a bug or request a feature, [open an issue](https://github.com/migueld51244/youtube-search-playlist/issues).
 
 ## License
 
-This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the ISC License. See [LICENSE](LICENSE) for
+details.
