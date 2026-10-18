@@ -260,6 +260,10 @@ function addSearchControl() {
     style.id = "playlist-search-styles";
     style.textContent = `
       #${searchContainerId} {
+        --playlist-search-background: #fff;
+        --playlist-search-control-background: #eee;
+        --playlist-search-text: #0f0f0f;
+        --playlist-search-border: #ccc;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -268,6 +272,15 @@ function addSearchControl() {
         max-width: 100%;
         box-sizing: border-box;
         margin: 12px auto;
+        color: var(--playlist-search-text);
+        color-scheme: light;
+      }
+      html[dark] #${searchContainerId} {
+        --playlist-search-background: #0f0f0f;
+        --playlist-search-control-background: #272727;
+        --playlist-search-text: #f1f1f1;
+        --playlist-search-border: #3f3f3f;
+        color-scheme: dark;
       }
       #${fallbackAreaId} {
         width: 100%;
@@ -277,17 +290,21 @@ function addSearchControl() {
         width: 200px;
         min-width: 0;
         padding: 8px 12px;
-        border: 1px solid var(--yt-spec-10-percent-layer, #ccc);
+        border: 1px solid var(--playlist-search-border);
         border-radius: 18px;
-        background: var(--yt-spec-raised-background, #fff);
-        color: var(--yt-spec-text-primary, #0f0f0f);
+        background: var(--playlist-search-background);
+        color: var(--playlist-search-text);
+      }
+      #${searchContainerId} input::placeholder {
+        color: var(--playlist-search-text);
+        opacity: 0.7;
       }
       #${searchContainerId} button {
         padding: 8px 12px;
         border: 0;
         border-radius: 18px;
-        background: var(--yt-spec-badge-chip-background, #eee);
-        color: var(--yt-spec-text-primary, #0f0f0f);
+        background: var(--playlist-search-control-background);
+        color: var(--playlist-search-text);
         cursor: pointer;
       }
       mark.${highlightClass} {

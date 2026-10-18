@@ -16,6 +16,7 @@ YouTube playlists are useful, but searching within a large playlist is not alway
 - Creates a fallback search area on playlist layouts without YouTube's chip bar
 - Show the search box on dedicated playlist pages and playlist watch pages, not unrelated pages
 - Highlights matching video titles in-place
+- Adapts the search controls to YouTube's light and dark themes
 - Finds the next match and scrolls to it smoothly
 - Works with playlist views that load videos dynamically
 - Lightweight browser extension with no backend required
