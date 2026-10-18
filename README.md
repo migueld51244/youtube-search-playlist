@@ -56,6 +56,9 @@ youtube-search-playlist/
 ├── LICENSE
 ├── README.md
 ├── package.json
+├── tests/
+│   ├── content.test.js
+│   └── popup.test.js
 ├── src/
 │   ├── manifest.json
 │   ├── content.js
@@ -66,6 +69,17 @@ youtube-search-playlist/
 │       └── popup.js
 └── .gitignore
 ```
+
+## Tests
+
+Run the automated extension tests with Node.js:
+
+```bash
+npm install
+npm test
+```
+
+The tests use jsdom to exercise playlist search behavior and popup status updates.
 
 ## How it works
 
@@ -80,7 +94,7 @@ The extension uses a content script to watch YouTube playlist pages and inject a
 
 Because YouTube uses lazy loading, the extension can only search videos that have already been loaded into the current page state. As you scroll, additional videos become searchable.
 
-This is also a small, focused extension, so it does not yet include broader polish such as a full build pipeline, automated tests, or extended configuration settings.
+This is also a small, focused extension, so it does not yet include broader polish such as a full build pipeline or extended configuration settings.
 
 ## Roadmap
 
