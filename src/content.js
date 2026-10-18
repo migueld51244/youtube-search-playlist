@@ -289,6 +289,10 @@ function addSearchControl() {
       }
       #${fallbackAreaId} {
         width: 100%;
+        background: var(--yt-spec-base-background, #fff);
+      }
+      html[dark] #${fallbackAreaId} {
+        background: var(--yt-spec-base-background, #0f0f0f);
       }
       #${fallbackAreaId}.${fixedFallbackClass} {
         position: fixed;
