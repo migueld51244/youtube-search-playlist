@@ -68,5 +68,5 @@ To report a bug or request a feature, [open an issue](https://github.com/migueld
 
 ## License
 
-This project is licensed under the ISC License. See [LICENSE](LICENSE) for
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for
 details.
