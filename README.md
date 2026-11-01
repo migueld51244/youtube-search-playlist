@@ -53,7 +53,7 @@ To run the extension from source:
 
 - **Chrome or Edge:** Open `chrome://extensions` or `edge://extensions`, enable
   Developer mode, click **Load unpacked**, and select the `src` directory.
-- **Firefox 109 or later:** Open `about:debugging#/runtime/this-firefox`, click
+- **Firefox 142 or later:** Open `about:debugging#/runtime/this-firefox`, click
   **Load Temporary Add-on...**, and select `src/manifest.json`. Temporary
   add-ons are removed when Firefox closes.
 
