@@ -8,18 +8,19 @@ right on the page.
 
 ## Get the extension
 
-Download the package for your browser from the
+Install the extension from the [Firefox Add-ons site](https://addons.mozilla.org/en-US/firefox/addon/youtube-playlist-searcher/),
+or download the `.xpi` from the
 [Releases page](https://github.com/migueld51244/youtube-search-playlist/releases).
 
 ### Firefox
 
-Download the Firefox `.xpi` package from a release. In Firefox, open
-`about:addons`, select the gear menu, choose **Install Add-on From File...**, and
-select the downloaded file.
+Install from the [Firefox Add-ons site](https://addons.mozilla.org/en-US/firefox/addon/youtube-playlist-searcher/),
+or download the `.xpi` from the [Releases page](https://github.com/migueld51244/youtube-search-playlist/releases).
 
 ### Chrome
 
-Download and extract the Chrome package from a release. Open
+Download and extract the Chrome `.zip` from the
+[Releases page](https://github.com/migueld51244/youtube-search-playlist/releases). Open
 `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and
 select the extracted folder containing `manifest.json`.
 
